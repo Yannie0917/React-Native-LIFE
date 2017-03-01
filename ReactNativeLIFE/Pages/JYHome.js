@@ -15,19 +15,38 @@ import {
   View,
   Image,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  ListView
 } from 'react-native';
+
+
+// 导航条
+import NavBar from '../Component/JYNavBar';
 
 // 顶部的滚动切换tab
 import ScrollableTabView,{ ScrollableTabBar } from 'react-native-scrollable-tab-view';
-// 导航条
-import NavBar from '../Component/JYNavBar';
+
+// 首页--最新
+import HomeNew from './JYHomeNew';
+// 首页--热销榜
+import HomeHot from './JYHomeHot';
+// 首页--逛店
+import HomeStroll from './JYHomeStroll';
+// 首页--限时购
+import HomeTimeLimit from './JYHomeTimelimit';
+// 首页--精选
+import HomeFeatured from './JYHomeFeatured';
+// 首页--歪果志
+import HomeArts from './JYHomeArts';
+// 首页--问答
+import HomeFAQs from './JYHomeFAQs';
+
+
+
 // 自我
 import Mine from './JYMine';
 
 export default class Home extends Component {
-
-  
 
   render() {
     return (
@@ -64,23 +83,15 @@ export default class Home extends Component {
             tabStyle={{paddingLeft:18,paddingRight:18}}
             someProp={'here'} />}
         >
-          <View tabLabel="最新" />
-          <View tabLabel="热销榜" />
-          <View tabLabel="逛店" />
-          <View tabLabel="限时购" />
-          <View tabLabel="精选" />
-          <View tabLabel="歪果志" />
-          <View tabLabel="问答" />
+          <HomeNew tabLabel="最新" />
+          <HomeHot tabLabel="热销榜" />
+          <HomeStroll tabLabel="逛店" />
+          <HomeTimeLimit tabLabel="限时购" />
+          <HomeFeatured tabLabel="精选" />
+          <HomeArts tabLabel="歪果志" />
+          <HomeFAQs tabLabel="问答" />
         </ScrollableTabView>
 
-
-        <TouchableHighlight
-          onPress={this.textPress.bind(this)}
-        >
-          <View>
-            <Text>我是首页</Text>
-          </View>
-        </TouchableHighlight>
       </View>
     );
   }
