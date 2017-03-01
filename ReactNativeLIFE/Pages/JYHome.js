@@ -18,10 +18,16 @@ import {
   Navigator
 } from 'react-native';
 
-import NavBar from '../Component/JYNavBar'
+// 顶部的滚动切换tab
+import ScrollableTabView,{ ScrollableTabBar } from 'react-native-scrollable-tab-view';
+// 导航条
+import NavBar from '../Component/JYNavBar';
+// 自我
 import Mine from './JYMine';
 
 export default class Home extends Component {
+
+  
 
   render() {
     return (
@@ -34,6 +40,39 @@ export default class Home extends Component {
           rightIcon="ios-search-outline"
           rightPress={this.rightPress.bind(this)}
         />
+
+        <ScrollableTabView
+          renderTabBar={() => <ScrollableTabBar
+
+            style={{
+              height:40,
+              borderWidth:0
+            }}
+
+            underlineColor='#ce3d3a'
+            activeTextColor='#393939'
+            inactiveTextColor='#393939'
+            underlineHeight={0}
+            underlineStyle={{
+              height: 2,
+              backgroundColor: '#fdd23c',
+              bottom: 1
+            }}
+            textStyle={{ fontSize: 14, bottom:4 }}
+            tabStyle={{ paddingBottom: 0 }}
+            backgroundColor='#fff'
+            tabStyle={{paddingLeft:18,paddingRight:18}}
+            someProp={'here'} />}
+        >
+          <View tabLabel="最新" />
+          <View tabLabel="热销榜" />
+          <View tabLabel="逛店" />
+          <View tabLabel="限时购" />
+          <View tabLabel="精选" />
+          <View tabLabel="歪果志" />
+          <View tabLabel="问答" />
+        </ScrollableTabView>
+
 
         <TouchableHighlight
           onPress={this.textPress.bind(this)}
@@ -73,7 +112,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   navBarStyle: {
-
-
   }
 });
