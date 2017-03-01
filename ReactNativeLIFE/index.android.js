@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-var Main = require('./Component/Main');
+import Main from './Pages/Main'
 
 export default class ReactNativeLIFE extends Component {
   render() {
