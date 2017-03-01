@@ -18,14 +18,23 @@ import {
   Navigator
 } from 'react-native';
 
-
-import Mine from './JYMine'
+import NavBar from '../Component/JYNavBar'
+import Mine from './JYMine';
 
 export default class Home extends Component {
 
   render() {
     return (
       <View style={styles.container}>
+
+        <NavBar
+          title="L I F E"
+          leftIcon="ios-calendar-outline"
+          leftPress={this.leftPress.bind(this)}
+          rightIcon="ios-search-outline"
+          rightPress={this.rightPress.bind(this)}
+        />
+
         <TouchableHighlight
           onPress={this.textPress.bind(this)}
         >
@@ -35,6 +44,14 @@ export default class Home extends Component {
         </TouchableHighlight>
       </View>
     );
+  }
+
+  leftPress() {
+    alert("左边")
+  }
+
+  rightPress() {
+    alert("右边")
   }
 
   textPress() {
@@ -51,8 +68,12 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  navBarStyle: {
+
+
+  }
 });
