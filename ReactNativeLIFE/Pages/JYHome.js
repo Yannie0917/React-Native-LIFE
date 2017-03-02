@@ -23,25 +23,25 @@ import {
 // 导航条
 import NavBar from '../Component/JYNavBar';
 
-// 顶部的滚动切换tab
+// 滚动切换组件
 import ScrollableTabView,{ ScrollableTabBar } from 'react-native-scrollable-tab-view';
+// 滚动切换组件的顶部tab
+var CustomScrollTabBar = require('../Component/JYCustomeScrollTabBar');
 
 // 首页--最新
-import HomeNew from './JYHomeNew';
+var HomeNew = require('./JYHomeNew');
 // 首页--热销榜
-import HomeHot from './JYHomeHot';
+var HomeHot = require('./JYHomeHot');
 // 首页--逛店
-import HomeStroll from './JYHomeStroll';
+var HomeStroll = require('./JYHomeStroll');
 // 首页--限时购
-import HomeTimeLimit from './JYHomeTimelimit';
+var HomeTimeLimit = require('./JYHomeTimelimit');
 // 首页--精选
-import HomeFeatured from './JYHomeFeatured';
+var HomeFeatured = require('./JYHomeFeatured');
 // 首页--歪果志
-import HomeArts from './JYHomeArts';
+var HomeArts = require('./JYHomeArts');
 // 首页--问答
-import HomeFAQs from './JYHomeFAQs';
-
-
+var HomeFAQs = require('./JYHomeFAQs');
 
 // 自我
 import Mine from './JYMine';
@@ -61,7 +61,7 @@ export default class Home extends Component {
         />
 
         <ScrollableTabView
-          renderTabBar={() => <ScrollableTabBar
+          renderTabBar={() => <CustomScrollTabBar
 
             style={{
               height:40,

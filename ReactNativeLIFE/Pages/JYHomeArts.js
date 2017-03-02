@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  *
- * 我的页面
+ * 首页 - 歪果志
  *
  */
 
@@ -16,12 +16,12 @@ import {
   ListView
 } from 'react-native';
 
-export default class JYHomeArts extends Component {
+var JYHomeArts = React.createClass({
 
-  // 在render渲染之后，React会根据Virtual DOM来生成真实DOM，生成完毕后会调用该函数。
-  componentDidMount() {
-
-  }
+  getDefaultProps() {
+    return {
+    }
+  },
 
   render() {
     return (
@@ -29,8 +29,10 @@ export default class JYHomeArts extends Component {
         <Text>歪果志</Text>
       </View>
     );
-  }
-}
+  },
+
+})
+
 
 const styles = StyleSheet.create({
   container: {
@@ -41,3 +43,5 @@ const styles = StyleSheet.create({
   },
 
 });
+
+module.exports = JYHomeArts;
