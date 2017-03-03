@@ -14,6 +14,8 @@ import {
 
 import Main from './Pages/Main'
 
+import Mine from './Pages/JYMine'
+
 export default class ReactNativeLIFE extends Component {
   render() {
     return (
