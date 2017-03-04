@@ -15,7 +15,8 @@ import {
   View,
   ListView,
   Dimensions,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -23,6 +24,13 @@ const { width, height } = Dimensions.get('window');
 import Swiper from 'react-native-swiper';
 
 var localData_hom_new = require('../LocalData/LocalData_home_new.json');
+
+// 顶部的banner图的高度
+var bannerHeight = width/375*200;
+// banner图下面的重点产品高度
+var focusViewHeight = width/375*148;
+// cell上部分的高度
+var cellTopViewHeight = width/375*200;
 
 var JYHomeNew = React.createClass({
 
@@ -48,18 +56,11 @@ var JYHomeNew = React.createClass({
 
   render() {
     return (
-
-      <View style={styles.container}>
-        <View style={styles.bannerStyle}>
-          {/*创建banner*/}
-          {this._renderBanner()}
-
-          {/*创建*/}
-          {this._renderFocusProduct()}
-
-        </View>
-      </View>
-
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+        renderHeader={this._renderListViewHeader}
+      />
     );
   },
 
@@ -106,13 +107,18 @@ var JYHomeNew = React.createClass({
       } else if(cellData.cell_type == 'focus_product') {
         tempFocusDataArr.push(cellData);
       } else {
+
+        // 由于请求回来的数据过多这里进行了过滤
+        if (i > 21) {
+          break;
+        }
+
         // 列表数据
         tempListDataArr.push(cellData);
       }
     }
-    console.log('banners数据:' + tempBannerDataArr);
-    console.log('list数据:' + tempListDataArr);
 
+    // 刷新状态
     this.setState({
       bannerDataArr:tempBannerDataArr,
       focusProductArr: tempFocusDataArr,
@@ -120,11 +126,23 @@ var JYHomeNew = React.createClass({
     })
   },
 
+  // 渲染ListView的HeaderView
+  _renderListViewHeader() {
+    return (
+      <View style={styles.listHeaderStyle}>
+        {/*上面的banner*/}
+        {this._renderBanner()}
+        {/*下面的重点产品图*/}
+        {this._renderFocusProduct()}
+      </View>
+    )
+  },
+
   // 渲染顶部的banner
   _renderBanner() {
     return(
       <Swiper
-        height={200}
+        height={bannerHeight}
         showsButtons={false}
         autoplay={true}
         autoplayTimeout={4}
@@ -136,6 +154,24 @@ var JYHomeNew = React.createClass({
         {this._renderSwiperItems()}
       </Swiper>
     )
+  },
+
+  // 渲染banner图 --> 循环创建轮播图
+  _renderSwiperItems() {
+    var items = [];
+    for (var i=0; i<this.state.bannerDataArr.length; i++) {
+      var bannerData = this.state.bannerDataArr[i];
+      console.log('i=' + i);
+      items.push(
+        <Image
+          key={i}
+          style={styles.bannerImageStyle}
+          source={{uri:bannerData.image_url}}
+        >
+        </Image>
+      )
+    }
+    return items;
   },
 
   // 渲染重点产品
@@ -166,75 +202,78 @@ var JYHomeNew = React.createClass({
     return focusItems;
   },
 
-  // 循环创建轮播图
-  _renderSwiperItems() {
-    var items = [];
-    for (var i=0; i<this.state.bannerDataArr.length; i++) {
-      var bannerData = this.state.bannerDataArr[i];
-      console.log('i=' + i);
-      items.push(
-          <Image
-            key={i}
-            style={styles.bannerImageStyle}
-            source={{uri:bannerData.image_url}}
-          >
-          </Image>
-      )
-    }
-    return items;
-  },
-
+  // 渲染单个cell
   _renderRow(rowData) {
+
+    var cellPostData = rowData['post'];
+
     return (
       <TouchableHighlight
         activeOpacity={1.0}
         underlayColor={'#ececec'}
-        onPress={()=>{this.cellPress(rowData)}}
+        onPress={()=>{this._cellPress(rowData)}}
       >
-        <View style = {styles.cellViewStyle}>
-          <Image source={{uri:rowData.imgsrc}} style={styles.leftImageStyle}/>
-          <View style={styles.rightViewStyle}>
-            <Text style = {styles.rightTitleStyle}>{rowData.title}</Text>
-            <Text style={styles.rightSubTitleStyle}>{rowData.digest}</Text>
+        <View style = {styles.cellTopViewStyle}>
+          {/*cell的上部分背景图*/}
+          <Image
+            style={styles.cellTopViewBackImgStyle}
+            source={{uri:cellPostData.new_cover_image_url}}
+          >
+
+          </Image>
+
+          <View style={styles.cellListViewStyle}>
+            <Text >{cellPostData.title}</Text>
           </View>
         </View>
       </TouchableHighlight>
     )
   },
 
+  // cell 的点击事件
+  _cellPress(rowData) {
+    alert(rowData.cell_type)
+  }
+
 })
 
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    // flex:1,
+    height:300,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
 
-  //
-  bannerStyle:{
-    width:width,
-    height:width/375*200,
+  // ListView 的headerView (包括banner和下面的重点产品图)
+  listHeaderStyle: {
+    alignItems: 'center',
+    backgroundColor: 'red',
   },
 
+  // banner的内部的图片
   bannerImageStyle:{
+    flex:1,
     width:width,
-    height:width/375*200
   },
 
+  // 重点产品
   focusViewStyle:{
     width:width,
-    height:148,
+    height:focusViewHeight,
     paddingTop:15,
+    paddingBottom:15,
     backgroundColor: '#f5f5f5'
   },
 
+  // 重点产品的内部图片
   focusImageStyle:{
     width:width,
-    height:width/375*148
+    flex:1,
   },
 
+  // 重点产品的左边的文字view
   focusLeftTextViewStyle:{
     alignItems: 'center',
     position:'absolute',
@@ -249,6 +288,19 @@ const styles = StyleSheet.create({
     paddingLeft:6,
     paddingRight:6,
     paddingBottom:5,
+  },
+
+  // cell的topView
+  cellTopViewStyle:{
+    height:cellTopViewHeight,
+    backgroundColor:'red',
+  },
+
+  // cell的topView的背景图
+  cellTopViewBackImgStyle:{
+    flex:1,
+    height:cellTopViewHeight,
+    backgroundColor:'gray',
   },
 
 });
