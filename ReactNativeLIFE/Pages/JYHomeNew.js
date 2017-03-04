@@ -28,7 +28,7 @@ var localData_hom_new = require('../LocalData/LocalData_home_new.json');
 // 顶部的banner图的高度
 var bannerHeight = width/375*200;
 // banner图下面的重点产品高度
-var focusViewHeight = width/375*148;
+var focusViewHeight = width/375*178;
 // cell上部分的高度
 var cellTopViewHeight = width/375*200;
 
@@ -49,6 +49,10 @@ var JYHomeNew = React.createClass({
       focusProductArr: [],
       // 下面的列表数据
       dataSource: new  ListView.DataSource({
+        rowHasChanged:(row1, row2) => row1 !== row2
+      }),
+      // 单个cell里面的下面的列表数据
+      postDataSource: new ListView.DataSource({
         rowHasChanged:(row1, row2) => row1 !== row2
       })
     }
@@ -207,6 +211,11 @@ var JYHomeNew = React.createClass({
 
     var cellPostData = rowData['post'];
 
+    // // 刷新状态
+    // this.setState({
+    //   postDataSource:this.state.postDataSource.cloneWithRows(cellPostData.post_items)
+    // })
+
     return (
       <TouchableHighlight
         activeOpacity={1.0}
@@ -218,15 +227,52 @@ var JYHomeNew = React.createClass({
           <Image
             style={styles.cellTopViewBackImgStyle}
             source={{uri:cellPostData.new_cover_image_url}}
-          >
+          />
 
-          </Image>
+          {/*cell的上部分背景图上面的文字*/}
+          <View style={styles.cellContentTitleViewStyle}>
+            {/*channel_icon*/}
+            <Image
+              style={{width:27, height:27, bottom:10}}
+              source={{uri:cellPostData.channel_icon}}
+            />
+            {/*title*/}
+            <View style={{borderTopWidth:0.5, borderTopColor:'white', borderBottomWidth:0.5, borderBottomColor:'white', padding:5}}>
+              <Text
+                style={{color:'white', fontSize:19}}
+              >{cellPostData.title}</Text>
+            </View>
+            <Text
+              style={{color:'white', fontSize:19, paddingTop:5}}
+            >[{cellPostData.channel_title}]</Text>
 
-          <View style={styles.cellListViewStyle}>
-            <Text >{cellPostData.title}</Text>
           </View>
+
+
+          {/*cell右上角的喜欢数量*/}
+          <View style={styles.cellLikeCountViewStyle}>
+            {/*上面的指纹图片*/}
+            <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
+            {/*下面的喜欢数*/}
+            <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
+          </View>
+
+
+          {/*<ListView*/}
+            {/*dataSource={this.state.postDataSource}*/}
+            {/*renderRow={this._renderPostItem}*/}
+          {/*/>*/}
+
         </View>
       </TouchableHighlight>
+    )
+  },
+
+  _renderPostItem() {
+    return(
+      <Text>
+        还是说水电费
+      </Text>
     )
   },
 
@@ -264,7 +310,7 @@ const styles = StyleSheet.create({
     height:focusViewHeight,
     paddingTop:15,
     paddingBottom:15,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#f5f5f5',
   },
 
   // 重点产品的内部图片
@@ -278,7 +324,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position:'absolute',
     left: 19,
-    top: 15+34,
+    top: 15+34*width/375,
     backgroundColor: 'transparent',
     borderTopWidth:0.5,
     borderBottomWidth:0.5,
@@ -302,6 +348,31 @@ const styles = StyleSheet.create({
     height:cellTopViewHeight,
     backgroundColor:'gray',
   },
+
+  // cell右上角的喜欢数量view
+  cellLikeCountViewStyle:{
+    position:'absolute',
+    alignItems: 'center',
+    width:35,
+    height:40,
+    right:10,
+    paddingTop:5,
+    backgroundColor:'rgba(0,0,0,.2)',
+    borderBottomLeftRadius:5,
+    borderBottomRightRadius:5,
+  },
+
+  cellContentTitleViewStyle:{
+    position:'absolute',
+    alignItems:'center',
+    height:cellTopViewHeight,
+    width:width,
+    top:0,
+    left:0,
+    backgroundColor:'rgba(0,0,0,.3)',
+    justifyContent:'center'
+  }
+
 
 });
 
