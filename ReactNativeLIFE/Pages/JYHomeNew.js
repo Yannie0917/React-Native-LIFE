@@ -16,12 +16,14 @@ import {
   ListView,
   Dimensions,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
 import Swiper from 'react-native-swiper';
+import CellItem from '../Component/JYHomeNewCellItem';
 
 var localData_hom_new = require('../LocalData/LocalData_home_new.json');
 
@@ -31,6 +33,8 @@ var bannerHeight = width/375*200;
 var focusViewHeight = width/375*178;
 // cell上部分的高度
 var cellTopViewHeight = width/375*200;
+// cell上部分的高度
+var cellBottomViewHeight = 153;
 
 var JYHomeNew = React.createClass({
 
@@ -222,51 +226,92 @@ var JYHomeNew = React.createClass({
         underlayColor={'#ececec'}
         onPress={()=>{this._cellPress(rowData)}}
       >
-        <View style = {styles.cellTopViewStyle}>
-          {/*cell的上部分背景图*/}
-          <Image
-            style={styles.cellTopViewBackImgStyle}
-            source={{uri:cellPostData.new_cover_image_url}}
-          />
 
-          {/*cell的上部分背景图上面的文字*/}
-          <View style={styles.cellContentTitleViewStyle}>
-            {/*channel_icon*/}
+        <View style={styles.cellSyle}>
+
+          <View style = {styles.cellTopViewStyle}>
+            {/*cell的上部分背景图*/}
             <Image
-              style={{width:27, height:27, bottom:10}}
-              source={{uri:cellPostData.channel_icon}}
+              style={styles.cellTopViewBackImgStyle}
+              source={{uri:cellPostData.new_cover_image_url}}
             />
-            {/*title*/}
-            <View style={{borderTopWidth:0.5, borderTopColor:'white', borderBottomWidth:0.5, borderBottomColor:'white', padding:5}}>
+
+            {/*cell的上部分背景图上面的文字*/}
+            <View style={styles.cellContentTitleViewStyle}>
+              {/*channel_icon*/}
+              <Image
+                style={{width:27, height:27, bottom:10}}
+                source={{uri:cellPostData.channel_icon}}
+              />
+              {/*title*/}
+              <View style={{borderTopWidth:0.5, borderTopColor:'white', borderBottomWidth:0.5, borderBottomColor:'white', padding:5}}>
+                <Text
+                  style={{color:'white', fontSize:19}}
+                >{cellPostData.title}</Text>
+              </View>
               <Text
-                style={{color:'white', fontSize:19}}
-              >{cellPostData.title}</Text>
+                style={{color:'white', fontSize:19, paddingTop:5}}
+              >[{cellPostData.channel_title}]</Text>
+
             </View>
-            <Text
-              style={{color:'white', fontSize:19, paddingTop:5}}
-            >[{cellPostData.channel_title}]</Text>
-
-          </View>
 
 
-          {/*cell右上角的喜欢数量*/}
-          <View style={styles.cellLikeCountViewStyle}>
-            {/*上面的指纹图片*/}
-            <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
-            {/*下面的喜欢数*/}
-            <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
-          </View>
+            {/*cell右上角的喜欢数量*/}
+            <View style={styles.cellLikeCountViewStyle}>
+              {/*上面的指纹图片*/}
+              <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
+              {/*下面的喜欢数*/}
+              <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
+            </View>
 
 
-          {/*<ListView*/}
+            {/*<ListView*/}
             {/*dataSource={this.state.postDataSource}*/}
             {/*renderRow={this._renderPostItem}*/}
-          {/*/>*/}
+            {/*/>*/}
+
+          </View>
+
+          <View style={styles.cellBottomViewStyle}>
+            <ScrollView
+              style={{flex:1}}
+              horizontal={true}
+              directionalLockEnabled={true}
+
+            >
+              {this._renderCellBotItems(cellPostData.post_items)}
+            </ScrollView>
+          </View>
 
         </View>
+
       </TouchableHighlight>
     )
   },
+
+  _renderCellBotItems(dataArr){
+
+    var cellBotItems = [];
+
+
+    for (var i = 0; i < dataArr.length; i++) {
+
+      var itemData = dataArr[i];
+
+      cellBotItems.push(
+        <CellItem
+          key={i}
+          topImageSource={itemData.cover_image_url}
+          title={itemData.name}
+          priceTitle={itemData.price}
+          topImageStyle={{height:88, width: 88, borderRadius:10}}
+        />
+      )
+    }
+    return cellBotItems;
+  },
+
+
 
   _renderPostItem() {
     return(
@@ -342,11 +387,17 @@ const styles = StyleSheet.create({
     backgroundColor:'red',
   },
 
+  cellBottomViewStyle:{
+    height:cellBottomViewHeight,
+    // backgroundColor:'blue',
+  },
+
+
   // cell的topView的背景图
   cellTopViewBackImgStyle:{
     flex:1,
     height:cellTopViewHeight,
-    backgroundColor:'gray',
+    // backgroundColor:'gray',
   },
 
   // cell右上角的喜欢数量view
@@ -371,8 +422,10 @@ const styles = StyleSheet.create({
     left:0,
     backgroundColor:'rgba(0,0,0,.3)',
     justifyContent:'center'
-  }
+  },
+  cellSyle:{
 
+  },
 
 });
 
