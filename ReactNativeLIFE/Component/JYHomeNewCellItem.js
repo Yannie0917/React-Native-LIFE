@@ -54,15 +54,12 @@ export default class JYHomeNewCellItem extends Component{
 }
 
 const styles = StyleSheet.create({
-
   itemStyle:{
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    // backgroundColor:'gray'
   },
   titleStyle:{
-    // backgroundColor:"blue",
     color: "black",
     fontSize: 12,
     width:65,

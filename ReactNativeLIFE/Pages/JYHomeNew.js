@@ -82,19 +82,19 @@ var JYHomeNew = React.createClass({
       .then((response) => response.json())
       .then(responseData => {
         var jsonData = responseData['data'];
-        this._detailWithDada(jsonData);
+        this._detailWithData(jsonData);
       })
       .catch((error) => {
         if (error) {
           console.log('错误信息:' + error);
           var jsonData = localData_hom_new['data'];
-          this._detailWithDada(jsonData);
+          this._detailWithData(jsonData);
         }
       })
   },
 
   // 数据转换
-  _detailWithDada(jsonData) {
+  _detailWithData(jsonData) {
 
     // 临时banner数据  与  临时 list列表数据
     var tempBannerDataArr = [], tempFocusDataArr=[], tempListDataArr = [];
@@ -253,7 +253,7 @@ var JYHomeNew = React.createClass({
           {/*cell右上角的喜欢数量*/}
           <View style={styles.cellLikeCountViewStyle}>
             {/*上面的指纹图片*/}
-            <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
+            <Image source={require('../Images/Home/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
             {/*下面的喜欢数*/}
             <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
           </View>
