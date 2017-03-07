@@ -246,15 +246,7 @@ var JYHomeFeatured = React.createClass({
 
 })
 
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-
   // cell的topView
   cellTopViewStyle:{
     height:cellTopViewHeight,
@@ -299,7 +291,6 @@ const styles = StyleSheet.create({
   },
 
   cellStyle:{
-    // backgroundColor:'pink',
     borderTopWidth:15,
     borderTopColor:'#f5f5f5'
   },
