@@ -16,7 +16,8 @@ import {
   Image,
   TouchableHighlight,
   Navigator,
-  ListView
+  ListView,
+  Platform
 } from 'react-native';
 
 
@@ -78,10 +79,10 @@ export default class Home extends Component {
               bottom: 1
             }}
             textStyle={{ fontSize: 14, bottom:4 }}
-            tabStyle={{ paddingBottom: 0 }}
             backgroundColor='#fff'
-            tabStyle={{paddingLeft:18,paddingRight:18}}
+            tabStyle={{paddingBottom: 0, paddingLeft:18,paddingRight:18}}
             someProp={'here'} />}
+            locked={Platform.OS === 'ios' ? false : true}
         >
           <HomeNew tabLabel="最新" />
           <HomeHot tabLabel="热销榜" />
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#F5FCFF',
   },
   navBarStyle: {
   }

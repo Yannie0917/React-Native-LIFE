@@ -12,13 +12,16 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  View
 } from 'react-native';
 
 export default class Search extends Component {
 
   render() {
     return (
-      <Text>搜索页面</Text>
+      <View style={styles.container}>
+        <Text>搜索页面</Text>
+      </View>
     );
   }
 }

@@ -20,7 +20,7 @@ import {
 
 export default class JYHomeNewCellItem extends Component{
   static propTypes = {
-    topImageSource:PropTypes.object,
+    topImageSource:PropTypes.string,
     title: PropTypes.string,
     priceTitle: PropTypes.string,
     style: PropTypes.object,
@@ -30,13 +30,17 @@ export default class JYHomeNewCellItem extends Component{
 
   render(){
     return(
-      <View style={[styles.itemStyle, this.props.style]}>
+      <View
+        style={[styles.itemStyle, this.props.style]}
+
+      >
         <Image
           style={this.props.topImageStyle}
           source={{uri:this.props.topImageSource}}
-        ></Image>
+          onPress={this.props.itemPress}
+        />
 
-        <Text style={styles.titleStyle}>
+        <Text style={styles.titleStyle} numberOfLines={1}>
           {this.props.title}
         </Text>
 
@@ -52,15 +56,17 @@ export default class JYHomeNewCellItem extends Component{
 const styles = StyleSheet.create({
 
   itemStyle:{
+    flex:1,
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    // backgroundColor:'gray'
   },
   titleStyle:{
-
+    // backgroundColor:"blue",
     color: "black",
     fontSize: 12,
-    width:60,
-    height:30
+    width:65,
+    marginVertical:5
   },
   priceStyle:{
     color: "#f84e4e",

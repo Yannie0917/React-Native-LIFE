@@ -108,11 +108,11 @@ var JYHomeNew = React.createClass({
       var cellData = homeListData[i];
 
       // 进行判断 区分数据
-      if (cellData.cell_type == 'banners') {
+      if (cellData.cell_type === 'banners') {
         // banners数据
         tempBannerDataArr = cellData.banners;
         // 重点产品数据
-      } else if(cellData.cell_type == 'focus_product') {
+      } else if(cellData.cell_type === 'focus_product') {
         tempFocusDataArr.push(cellData);
       } else {
 
@@ -221,104 +221,79 @@ var JYHomeNew = React.createClass({
     // })
 
     return (
-      <TouchableHighlight
-        activeOpacity={1.0}
-        underlayColor={'#ececec'}
-        onPress={()=>{this._cellPress(rowData)}}
-      >
+      <View>
 
-        <View style={styles.cellSyle}>
+        <View style = {styles.cellTopViewStyle}>
+          {/*cell的上部分背景图*/}
+          <Image
+            style={styles.cellTopViewBackImgStyle}
+            source={{uri:cellPostData.new_cover_image_url}}
+          />
 
-          <View style = {styles.cellTopViewStyle}>
-            {/*cell的上部分背景图*/}
+          {/*cell的上部分背景图上面的文字*/}
+          <View style={styles.cellTopViewContentStyle}>
+            {/*channel_icon*/}
             <Image
-              style={styles.cellTopViewBackImgStyle}
-              source={{uri:cellPostData.new_cover_image_url}}
+              style={{width:27, height:27, bottom:10}}
+              source={{uri:cellPostData.channel_icon}}
             />
-
-            {/*cell的上部分背景图上面的文字*/}
-            <View style={styles.cellContentTitleViewStyle}>
-              {/*channel_icon*/}
-              <Image
-                style={{width:27, height:27, bottom:10}}
-                source={{uri:cellPostData.channel_icon}}
-              />
-              {/*title*/}
-              <View style={{borderTopWidth:0.5, borderTopColor:'white', borderBottomWidth:0.5, borderBottomColor:'white', padding:5}}>
-                <Text
-                  style={{color:'white', fontSize:19}}
-                >{cellPostData.title}</Text>
-              </View>
+            {/*title*/}
+            <View style={{borderTopWidth:0.5, borderTopColor:'white', borderBottomWidth:0.5, borderBottomColor:'white', padding:5}}>
               <Text
-                style={{color:'white', fontSize:19, paddingTop:5}}
-              >[{cellPostData.channel_title}]</Text>
-
+                style={{color:'white', fontSize:19}}
+              >{cellPostData.title}</Text>
             </View>
-
-
-            {/*cell右上角的喜欢数量*/}
-            <View style={styles.cellLikeCountViewStyle}>
-              {/*上面的指纹图片*/}
-              <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
-              {/*下面的喜欢数*/}
-              <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
-            </View>
-
-
-            {/*<ListView*/}
-            {/*dataSource={this.state.postDataSource}*/}
-            {/*renderRow={this._renderPostItem}*/}
-            {/*/>*/}
+            <Text
+              style={{color:'white', fontSize:19, paddingTop:5}}
+            >[{cellPostData.channel_title}]</Text>
 
           </View>
 
-          <View style={styles.cellBottomViewStyle}>
-            <ScrollView
-              style={{flex:1}}
-              horizontal={true}
-              directionalLockEnabled={true}
 
-            >
-              {this._renderCellBotItems(cellPostData.post_items)}
-            </ScrollView>
+          {/*cell右上角的喜欢数量*/}
+          <View style={styles.cellLikeCountViewStyle}>
+            {/*上面的指纹图片*/}
+            <Image source={require('../Images/HomeNew/icon_post_favorite_21x21_.png')} style={{width:21, height: 21}} />
+            {/*下面的喜欢数*/}
+            <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
           </View>
 
         </View>
 
-      </TouchableHighlight>
+        {/*cell下半部分的横向滚动列表*/}
+        <View style={styles.cellBottomViewStyle}>
+          <ScrollView
+            style={{flex:1}}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingHorizontal:5}}
+          >
+            {this._renderCellBotItems(cellPostData.post_items)}
+          </ScrollView>
+        </View>
+
+      </View>
     )
   },
 
+  // 渲染cell下半部分的横向滚动
   _renderCellBotItems(dataArr){
-
     var cellBotItems = [];
-
-
     for (var i = 0; i < dataArr.length; i++) {
-
       var itemData = dataArr[i];
-
       cellBotItems.push(
-        <CellItem
+        // 自定义的一个item组件
+        <CellItem 
           key={i}
-          topImageSource={itemData.cover_image_url}
-          title={itemData.name}
-          priceTitle={itemData.price}
-          topImageStyle={{height:88, width: 88, borderRadius:10}}
+           topImageSource={itemData.cover_image_url} 
+          title={itemData.name}   priceTitle={itemData.price} 
+          topImageStyle={{height:88, width: 88, borderRadius:10}} 
+          style={{padding: 5}} 
         />
       )
     }
     return cellBotItems;
-  },
-
-
-
-  _renderPostItem() {
-    return(
-      <Text>
-        还是说水电费
-      </Text>
-    )
   },
 
   // cell 的点击事件
@@ -330,17 +305,9 @@ var JYHomeNew = React.createClass({
 
 
 const styles = StyleSheet.create({
-  container: {
-    // flex:1,
-    height:300,
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-
   // ListView 的headerView (包括banner和下面的重点产品图)
   listHeaderStyle: {
     alignItems: 'center',
-    backgroundColor: 'red',
   },
 
   // banner的内部的图片
@@ -384,20 +351,18 @@ const styles = StyleSheet.create({
   // cell的topView
   cellTopViewStyle:{
     height:cellTopViewHeight,
-    backgroundColor:'red',
   },
 
+  // cell的bottomView
   cellBottomViewStyle:{
     height:cellBottomViewHeight,
-    // backgroundColor:'blue',
+    width:width,
   },
-
 
   // cell的topView的背景图
   cellTopViewBackImgStyle:{
     flex:1,
     height:cellTopViewHeight,
-    // backgroundColor:'gray',
   },
 
   // cell右上角的喜欢数量view
@@ -413,18 +378,16 @@ const styles = StyleSheet.create({
     borderBottomRightRadius:5,
   },
 
-  cellContentTitleViewStyle:{
+  // cell上半部分的背景图上的黑色蒙层及文字信息
+  cellTopViewContentStyle:{
     position:'absolute',
     alignItems:'center',
     height:cellTopViewHeight,
     width:width,
     top:0,
     left:0,
-    backgroundColor:'rgba(0,0,0,.3)',
+    backgroundColor:'rgba(0,0,0,.2)',
     justifyContent:'center'
-  },
-  cellSyle:{
-
   },
 
 });

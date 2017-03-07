@@ -12,15 +12,19 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 export default class Mine extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>自我页面</Text>
-      </View>
+
+    <View style={styles.container}>
+      <Text>
+        自我页面
+      </Text>
+    </View>
     );
   }
 }
