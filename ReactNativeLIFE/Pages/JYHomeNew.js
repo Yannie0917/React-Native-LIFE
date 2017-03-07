@@ -65,6 +65,7 @@ var JYHomeNew = React.createClass({
   render() {
     return (
       <ListView
+        style={{flex:1}}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
         renderHeader={this._renderListViewHeader}
@@ -221,7 +222,7 @@ var JYHomeNew = React.createClass({
     // })
 
     return (
-      <View>
+      <View style={styles.cellStyle}>
 
         <View style = {styles.cellTopViewStyle}>
           {/*cell的上部分背景图*/}
@@ -268,6 +269,7 @@ var JYHomeNew = React.createClass({
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingHorizontal:5}}
+            automaticallyAdjustContentInsets={false}
           >
             {this._renderCellBotItems(cellPostData.post_items)}
           </ScrollView>
@@ -321,7 +323,6 @@ const styles = StyleSheet.create({
     width:width,
     height:focusViewHeight,
     paddingTop:15,
-    paddingBottom:15,
     backgroundColor: '#f5f5f5',
   },
 
@@ -346,6 +347,13 @@ const styles = StyleSheet.create({
     paddingLeft:6,
     paddingRight:6,
     paddingBottom:5,
+  },
+
+  // cell的样式
+  cellStyle:{
+    // backgroundColor:'pink',
+    borderTopWidth:15,
+    borderTopColor:'#f5f5f5'
   },
 
   // cell的topView

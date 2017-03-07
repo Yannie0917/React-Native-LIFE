@@ -82,7 +82,7 @@ export default class Home extends Component {
             backgroundColor='#fff'
             tabStyle={{paddingBottom: 0, paddingLeft:18,paddingRight:18}}
             someProp={'here'} />}
-            locked={Platform.OS === 'ios' ? false : true}
+          locked={Platform.OS === 'ios' ? false : true}
         >
           <HomeNew tabLabel="最新" />
           <HomeHot tabLabel="热销榜" />

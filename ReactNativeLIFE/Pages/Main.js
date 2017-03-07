@@ -17,6 +17,9 @@ import {
   Navigator,
 } from 'react-native';
 
+
+var tabBarHeight = 46;
+
 import TabNavigator from 'react-native-tab-navigator';
 
 import Home from './JYHome'
@@ -37,7 +40,8 @@ export default class Main extends Component {
       <TabNavigator
         hidesTabTouch={true}
         tabBarStyle={styles.tabBarStyle}
-        sceneStyle={{ paddingBottom: 0 }}
+        // 这里是调整底部间隙,避免底部的tabBar挡住上面的视图
+        sceneStyle={{paddingBottom: tabBarHeight}}
       >
 
         {/*首页*/}
@@ -51,7 +55,6 @@ export default class Main extends Component {
           onPress={() => this.setState({ selectedTab: 'Home' })}>
           {
             <Navigator
-              style={{flex:1}}
               initialRoute={{
                 name: 'Home',
                 component: Home
@@ -78,7 +81,6 @@ export default class Main extends Component {
           onPress={() => this.setState({ selectedTab: 'Search' })}>
           {
             <Navigator
-              style={{flex:1}}
               initialRoute={{
                 name: 'Search',
                 component: Search
@@ -105,7 +107,7 @@ export default class Main extends Component {
           onPress={() => this.setState({ selectedTab: 'Mine' })}>
           {
             <Navigator
-              style={{flex:1}}
+
               initialRoute={{
                 name: 'Mine',
                 component: Mine
@@ -129,7 +131,7 @@ export default class Main extends Component {
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    height: 46,
+    height: tabBarHeight,
     alignItems:'center',
     justifyContent: 'center',
     backgroundColor: '#fff'

@@ -19,11 +19,11 @@ import {
   ScrollView
 } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
+
 var localData_hom_hot = require('../LocalData/LocalData_home_hot.json');
 
 import CellItem from '../Component/JYHomeNewCellItem';
-
-const { width, height } = Dimensions.get('window');
 
 var JYHomeHot = React.createClass({
 
@@ -134,17 +134,16 @@ var JYHomeHot = React.createClass({
         {/*cell的头部下半部分*/}
         <View style={styles.cellBotTitleViewStyle}>
           <Image
-            style={{width:30, height:32, marginLeft:10}}
+            style={{width:28, height:28, marginLeft:15, borderRadius:14}}
             source={{uri:botTitleData.avatar_url}}
           />
-          <Text>
+          <Text style={{paddingLeft:10, fontSize:12, color:'#8888'}}>
             {botTitleData.nickname}
           </Text>
 
         </View>
         {/*cell的尾部横向滚动列表*/}
         <ScrollView
-          style={{flex:1}}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
@@ -198,7 +197,7 @@ const styles = StyleSheet.create({
     paddingVertical:20,
     paddingHorizontal:15,
     paddingTop:20,
-    paddingBottom:7,
+    paddingBottom:10,
   },
 
   cellLeftTitleStyle:{
