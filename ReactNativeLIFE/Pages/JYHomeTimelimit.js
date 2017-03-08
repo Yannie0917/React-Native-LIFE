@@ -123,9 +123,11 @@ var JYHomeTimeLimit = React.createClass({
         </Image>
         {/*左边的文字*/}
         <View style={styles.focusLeftTextViewStyle}>
-          <Text style={{color:'#383838', fontSize:14, lineHeight:20}}>{focusData.introduction}</Text>
-          <Text style={{color:'#383838', fontSize:19, lineHeight:27}}>{focusData.title}</Text>
-          <Text style={{color:'#383838', fontSize:13, lineHeight:18}}>{focusData.sub_title}</Text>
+          <View style={{borderTopWidth:0.5, borderBottomWidth:0.5, borderTopColor:'black', borderBottomColor:'black', padding:5, alignItems:'center'}}>
+            <Text style={{color:'#383838', fontSize:14, lineHeight:20}}>{focusData.introduction}</Text>
+            <Text style={{color:'#383838', fontSize:19, lineHeight:27, marginTop:5}}>{focusData.title}</Text>
+          </View>
+          <Text style={{color:'#383838', fontSize:13, lineHeight:18, padding:5}}>{focusData.sub_title}</Text>
         </View>
 
       </View>
@@ -159,14 +161,6 @@ const styles = StyleSheet.create({
     left: 19,
     top: 15+34*width/375,
     backgroundColor: 'transparent',
-    borderTopWidth:0.5,
-    borderBottomWidth:0.5,
-    borderTopColor:'black',
-    borderBottomColor:'black',
-    paddingTop:5,
-    paddingLeft:6,
-    paddingRight:6,
-    paddingBottom:5,
   },
 
 });
