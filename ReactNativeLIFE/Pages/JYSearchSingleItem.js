@@ -28,7 +28,7 @@ var cellTopImageHeight = cellTopImageWidth*165/375;
 import SearchSpecialItem from '../Component/JYSearchSpecialCellItem';
 
 // 本地假数据
-var localData_search_special = require('../LocalData/LocalData_search_special.json');
+var localData_search_singleItem = require('../LocalData/LocalData_search_singleItem.json');
 
 var JYSearchSingleItem = React.createClass({
 
@@ -64,7 +64,7 @@ var JYSearchSingleItem = React.createClass({
       .catch((error) => {
         if (error) {
           console.log('错误信息:' + error);
-          var jsonData = localData_search_special['data'];
+          var jsonData = localData_search_singleItem['data'];
           this._detailWithData(jsonData);
         }
       })
@@ -87,9 +87,7 @@ var JYSearchSingleItem = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
-      >
-
-      </ListView>
+      />
     );
   },
 
@@ -134,7 +132,6 @@ const styles = StyleSheet.create({
     height:cellTopImageHeight,
     width:cellTopImageWidth
   },
-
 });
 
 module.exports = JYSearchSingleItem;
