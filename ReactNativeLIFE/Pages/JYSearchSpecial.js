@@ -38,7 +38,7 @@ import SearchSpecialItem from '../Component/JYSearchSpecialCellItem';
 // 本地假数据
 var localData_search_special = require('../LocalData/LocalData_search_special.json');
 
-var JYHomeArts = React.createClass({
+var JYSearchSpecial = React.createClass({
 
   getDefaultProps() {
     return {
@@ -281,4 +281,4 @@ const styles = StyleSheet.create({
 
 });
 
-module.exports = JYHomeArts;
+module.exports = JYSearchSpecial;

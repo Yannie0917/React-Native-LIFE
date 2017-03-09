@@ -22,6 +22,7 @@ import NavBar from '../Component/JYNavBar';
 import ScrollableTabView,{ DefaultTabBar } from 'react-native-scrollable-tab-view';
 // 搜索-栏目
 var SearchSpecial = require('./JYSearchSpecial');
+var SearchSingleItem = require('./JYSearchSingleItem');
 
 export default class Home extends Component {
 
@@ -31,7 +32,6 @@ export default class Home extends Component {
 
         <NavBar
           title="L I F E"
-
         />
 
         <ScrollableTabView
@@ -58,7 +58,7 @@ export default class Home extends Component {
           locked={Platform.OS === 'ios' ? false : true}
         >
           <SearchSpecial tabLabel="栏目" />
-          <View tabLabel="单品" />
+          <SearchSingleItem tabLabel="单品" />
         </ScrollableTabView>
 
       </View>
