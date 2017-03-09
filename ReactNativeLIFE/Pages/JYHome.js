@@ -23,7 +23,6 @@ import {
 
 // 导航条
 import NavBar from '../Component/JYNavBar';
-
 // 滚动切换组件
 import ScrollableTabView,{ ScrollableTabBar } from 'react-native-scrollable-tab-view';
 // 滚动切换组件的顶部tab
@@ -118,11 +117,6 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
+    flex: 1
   },
-  navBarStyle: {
-  }
 });

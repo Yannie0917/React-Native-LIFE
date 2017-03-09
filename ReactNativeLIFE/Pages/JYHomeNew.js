@@ -54,10 +54,6 @@ var JYHomeNew = React.createClass({
       // 下面的列表数据
       dataSource: new  ListView.DataSource({
         rowHasChanged:(row1, row2) => row1 !== row2
-      }),
-      // 单个cell里面的下面的列表数据
-      postDataSource: new ListView.DataSource({
-        rowHasChanged:(row1, row2) => row1 !== row2
       })
     }
   },
