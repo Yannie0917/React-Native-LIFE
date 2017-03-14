@@ -12,14 +12,14 @@ import {
   View
 } from 'react-native';
 
-import Main from './Pages/Main'
+import App from './Pages/JYApp'
 
 import Mine from './Pages/JYMine'
 
 export default class ReactNativeLIFE extends Component {
   render() {
     return (
-      <Main />
+      <App />
     );
   }
 }

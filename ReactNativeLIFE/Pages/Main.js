@@ -54,19 +54,7 @@ export default class Main extends Component {
           renderSelectedIcon={() => <Image source={require('../Images/TabBar/icon_home_selected.png')} />}
           onPress={() => this.setState({ selectedTab: 'Home' })}>
           {
-            <Navigator
-              initialRoute={{
-                name: 'Home',
-                component: Home
-              }}
-              configureScene={(route) => {
-                return Navigator.SceneConfigs.PushFromRight;
-              }}
-              renderScene={(route, navigator) => {
-                let Component = route.component;
-                return <Component {...route.params} navigator={navigator} />
-              }}
-            />
+            <Home {...this.props}/>
           }
         </TabNavigator.Item>
 
@@ -80,19 +68,7 @@ export default class Main extends Component {
           renderSelectedIcon={() => <Image source={require('../Images/TabBar/icon_discovery_selected.png')} />}
           onPress={() => this.setState({ selectedTab: 'Search' })}>
           {
-            <Navigator
-              initialRoute={{
-                name: 'Search',
-                component: Search
-              }}
-              configureScene={(route) => {
-                return Navigator.SceneConfigs.PushFromRight;
-              }}
-              renderScene={(route, navigator) => {
-                let Component = route.component;
-                return <Component {...route.params} navigator={navigator} />
-              }}
-            />
+            <Search {...this.props}/>
           }
         </TabNavigator.Item>
 
@@ -106,20 +82,7 @@ export default class Main extends Component {
           renderSelectedIcon={() => <Image source={require('../Images/TabBar/icon_personal_selected.png')} />}
           onPress={() => this.setState({ selectedTab: 'Mine' })}>
           {
-            <Navigator
-
-              initialRoute={{
-                name: 'Mine',
-                component: Mine
-              }}
-              configureScene={(route) => {
-                return Navigator.SceneConfigs.PushFromRight;
-              }}
-              renderScene={(route, navigator) => {
-                let Component = route.component;
-                return <Component {...route.params} navigator={navigator} />
-              }}
-            />
+            <Mine {...this.props}/>
           }
         </TabNavigator.Item>
       </TabNavigator>

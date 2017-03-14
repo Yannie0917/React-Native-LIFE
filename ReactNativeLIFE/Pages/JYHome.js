@@ -83,7 +83,7 @@ export default class Home extends Component {
             someProp={'here'} />}
           locked={Platform.OS === 'ios' ? false : true}
         >
-          <HomeNew tabLabel="最新" />
+          <HomeNew tabLabel="最新" navigator={this.props.navigator}/>
           <HomeHot tabLabel="热销榜" />
           <HomeStroll tabLabel="逛店" />
           <HomeTimeLimit tabLabel="限时购" />
@@ -97,7 +97,13 @@ export default class Home extends Component {
   }
 
   leftPress() {
-    alert("左边")
+    const { navigator } = this.props;
+    if(navigator) {
+      navigator.push({
+        name: 'Mine',
+        component: Mine,
+      })
+    }
   }
 
   rightPress() {

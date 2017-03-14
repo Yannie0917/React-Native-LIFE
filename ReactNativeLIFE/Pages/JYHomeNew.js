@@ -36,6 +36,9 @@ var cellTopViewHeight = width/375*200;
 // cell上部分的高度
 var cellBottomViewHeight = 153;
 
+// 自我
+import Mine from './JYMine';
+
 var JYHomeNew = React.createClass({
 
   getDefaultProps() {
@@ -290,6 +293,7 @@ var JYHomeNew = React.createClass({
           title={itemData.name}   priceTitle={itemData.price} 
           topImageStyle={{height:88, width: 88, borderRadius:10}} 
           style={{padding: 5}} 
+          navigator={this.props.navigator}
         />
       )
     }
@@ -297,9 +301,20 @@ var JYHomeNew = React.createClass({
   },
 
   // cell 的点击事件
-  _cellPress(rowData) {
-    alert(rowData.cell_type)
-  }
+  _cellItemPress(rowData) {
+    const { navigator } = this.props;
+
+    console.log('导航栏:' + navigator);
+
+    alert('哈哈哈');
+
+    // if(navigator) {
+    //   navigator.push({
+    //     name: 'Mine',
+    //     component: Mine,
+    //   })
+    // }
+  },
 
 })
 

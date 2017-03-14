@@ -6,7 +6,7 @@
  * 自定的cell的item
  *
  */
-
+// 如果要为View添加普通点击事件，请直接使用Touchable系列组件替代View，然后添加onPress函数）。
 import React, {
   Component,
   PropTypes
@@ -15,8 +15,11 @@ import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
+// 自我
+import Mine from '../Pages/JYMine';
 
 export default class JYHomeNewCellItem extends Component{
   static propTypes = {
@@ -30,25 +33,35 @@ export default class JYHomeNewCellItem extends Component{
 
   render(){
     return(
-      <View
+      <TouchableOpacity
         style={[styles.itemStyle, this.props.style]}
-
+        activeOpacity = {0.8}
+        onPress={(cellData)=>{
+          const { navigator } = this.props;
+          if(navigator) {
+            navigator.push({
+              name: 'Mine',
+              component: Mine,
+            })
+          }
+        }}
       >
         <Image
           style={this.props.topImageStyle}
           source={{uri:this.props.topImageSource}}
-          onPress={this.props.itemPress}
+
         />
 
-        <Text style={styles.titleStyle} numberOfLines={1}>
+        <Text style={styles.titleStyle} numberOfLines={1} onPress={this._myPress}>
           {this.props.title}
+
         </Text>
 
         <Text style={styles.priceStyle}>
           {this.props.priceTitle}
         </Text>
 
-      </View>
+      </TouchableOpacity>
     )
   }
 }
