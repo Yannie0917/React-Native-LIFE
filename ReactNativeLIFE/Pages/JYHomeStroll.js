@@ -180,6 +180,7 @@ var JYHomeStroll = React.createClass({
           title={itemData.name}   priceTitle={itemData.price}
           topImageStyle={{height:88, width: 88, borderRadius:10}}
           style={{padding: 5}}
+          navigator={this.props.navigator}
         />
       )
     }

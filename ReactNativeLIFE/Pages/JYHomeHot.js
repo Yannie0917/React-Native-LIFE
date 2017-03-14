@@ -170,6 +170,7 @@ var JYHomeHot = React.createClass({
           priceTitle={itemData.price}
           topImageStyle={{height:88, width: 88, borderRadius:44}}
           style={{padding: 5}}
+          navigator={this.props.navigator}
         />
       )
     }

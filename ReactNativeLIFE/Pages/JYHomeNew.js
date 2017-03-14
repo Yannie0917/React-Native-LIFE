@@ -17,7 +17,8 @@ import {
   Dimensions,
   Image,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -36,8 +37,8 @@ var cellTopViewHeight = width/375*200;
 // cell上部分的高度
 var cellBottomViewHeight = 153;
 
-// 自我
-import Mine from './JYMine';
+// 商品详情
+import ProductDetails from '../Pages/JYProductDetails';
 
 var JYHomeNew = React.createClass({
 
@@ -224,7 +225,20 @@ var JYHomeNew = React.createClass({
     return (
       <View style={styles.cellStyle}>
 
-        <View style = {styles.cellTopViewStyle}>
+        {/*cell上半部分的展示图*/}
+        <TouchableOpacity
+          style = {styles.cellTopViewStyle}
+          activeOpacity={0.8}
+          onPress={()=>{
+            const { navigator } = this.props;
+            if(navigator) {
+              navigator.push({
+                name: 'ProductDetails',
+                component: ProductDetails,
+              })
+            }
+          }}
+        >
           {/*cell的上部分背景图*/}
           <Image
             style={styles.cellTopViewBackImgStyle}
@@ -259,7 +273,7 @@ var JYHomeNew = React.createClass({
             <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
           </View>
 
-        </View>
+        </TouchableOpacity>
 
         {/*cell下半部分的横向滚动列表*/}
         <View style={styles.cellBottomViewStyle}>

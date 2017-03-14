@@ -16,12 +16,10 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-// 自我
-import Mine from '../Pages/JYMine';
-
-
+// 商品详情
+import ProductDetails from '../Pages/JYProductDetails';
 
 export default class JYHomeNewCellItem extends Component{
   static propTypes = {
@@ -40,13 +38,10 @@ export default class JYHomeNewCellItem extends Component{
         activeOpacity = {0.8}
         onPress={(cellData)=>{
           const { navigator } = this.props;
-
-          console.log('navigator:' + navigator);
-
           if(navigator) {
             navigator.push({
-              name: 'Mine',
-              component: Mine,
+              name: 'ProductDetails',
+              component: ProductDetails,
             })
           }
         }}
