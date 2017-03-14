@@ -52,7 +52,10 @@ export default class Main extends Component {
           titleStyle={{height: 0}}
           renderIcon={() => <Image source={require('../Images/TabBar/icon_home.png')} style={{width: 25, height: 25, paddingTop: 5}} />}
           renderSelectedIcon={() => <Image source={require('../Images/TabBar/icon_home_selected.png')} />}
-          onPress={() => this.setState({ selectedTab: 'Home' })}>
+          onPress={() => {
+            console.log('首页this.props.navigator' + this.props.navigator);
+            this.setState({ selectedTab: 'Home' })
+          }}>
           {
             <Home {...this.props}/>
           }

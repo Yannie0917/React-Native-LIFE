@@ -1,12 +1,7 @@
-/**
- * @author Lei
- * @repo https://github.com/stoneWeb/elm-react-native
- */
-'use strict';
+
 
 import React, { Component } from 'react'
 import {
-  Navigator,
   View
 } from 'react-native'
 

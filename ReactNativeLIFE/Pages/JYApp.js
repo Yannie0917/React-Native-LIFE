@@ -5,7 +5,6 @@ import {
   View,
   StatusBar,
   Platform,
-  Text
 } from 'react-native'
 
 import Wrapper from './JYWrapper'
@@ -17,15 +16,14 @@ export default class JYApp extends Component{
   render(){
     return (
       <Navigator
-        initialRoute={{
-          component: Wrapper
+        initialRoute={{ component: Wrapper }}
+        configureScene={(route) => {
+          return Navigator.SceneConfigs.FloatFromRight;
         }}
-        configureScene={() => Navigator.SceneConfigs.FloatFromRight}
         renderScene={(route, navigator) => {
-           return <route.component navigator={navigator} {...route.args}/>
-          }
-        }
-      />
+          let Component = route.component;
+          return <Component {...route.params} navigator={navigator} />
+        }} />
     )
   }
 }

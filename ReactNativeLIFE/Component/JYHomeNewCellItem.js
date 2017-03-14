@@ -21,6 +21,8 @@ import {
 // 自我
 import Mine from '../Pages/JYMine';
 
+
+
 export default class JYHomeNewCellItem extends Component{
   static propTypes = {
     topImageSource:PropTypes.string,
@@ -38,6 +40,9 @@ export default class JYHomeNewCellItem extends Component{
         activeOpacity = {0.8}
         onPress={(cellData)=>{
           const { navigator } = this.props;
+
+          console.log('navigator:' + navigator);
+
           if(navigator) {
             navigator.push({
               name: 'Mine',

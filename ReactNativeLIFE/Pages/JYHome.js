@@ -84,12 +84,12 @@ export default class Home extends Component {
           locked={Platform.OS === 'ios' ? false : true}
         >
           <HomeNew tabLabel="最新" navigator={this.props.navigator}/>
-          <HomeHot tabLabel="热销榜" />
-          <HomeStroll tabLabel="逛店" />
-          <HomeTimeLimit tabLabel="限时购" />
-          <HomeFeatured tabLabel="精选" />
-          <HomeArts tabLabel="歪果志" />
-          <HomeFAQs tabLabel="问答" />
+          <HomeHot tabLabel="热销榜" navigator={this.props.navigator}/>
+          <HomeStroll tabLabel="逛店" navigator={this.props.navigator}/>
+          <HomeTimeLimit tabLabel="限时购" navigator={this.props.navigator}/>
+          <HomeFeatured tabLabel="精选" navigator={this.props.navigator}/>
+          <HomeArts tabLabel="歪果志" navigator={this.props.navigator}/>
+          <HomeFAQs tabLabel="问答" navigator={this.props.navigator}/>
         </ScrollableTabView>
 
       </View>
@@ -98,6 +98,9 @@ export default class Home extends Component {
 
   leftPress() {
     const { navigator } = this.props;
+
+    console.log('navigator=' + navigator + 'props='+ this.props);
+
     if(navigator) {
       navigator.push({
         name: 'Mine',

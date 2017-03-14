@@ -169,7 +169,6 @@ var JYHomeNew = React.createClass({
     var items = [];
     for (var i=0; i<this.state.bannerDataArr.length; i++) {
       var bannerData = this.state.bannerDataArr[i];
-      console.log('i=' + i);
       items.push(
         <Image
           key={i}
