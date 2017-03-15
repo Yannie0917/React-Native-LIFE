@@ -6,19 +6,22 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View,
-  ScrollView
+  WebView,
+  Text
 } from 'react-native';
 
 export default class JYProductDetails extends Component {
   render() {
     return (
-
-      <View style={styles.container}>
-        <Text>
-          商品详情页
-        </Text>
+      <View style={{flex:1}}>
+        <WebView style={styles.webview_style}
+                 source={{uri: 'http://www.mglife.me/posts/959/content'}}
+                 startInLoadingState={true}
+                 domStorageEnabled={true}
+                 javaScriptEnabled={true}
+        >
+        </WebView>
       </View>
     );
   }
@@ -31,5 +34,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+
+  webview_style:{
+    backgroundColor:'#00ff00',
+  }
 
 });
