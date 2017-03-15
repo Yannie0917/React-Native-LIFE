@@ -1,6 +1,6 @@
 /**
- * Created by Sunshine on 2017/3/14.
- * 商品详情
+ * Created by Sunshine on 2017/3/15.
+ * 攻略详情
  */
 import React, { Component } from 'react';
 import {
@@ -14,11 +14,12 @@ import {
 // 导航条
 import NavBar from '../Component/JYNavBar';
 
-export default class JYProductDetails extends Component {
+export default class JYStrategyDetails extends Component {
   constructor(props){
     super(props)
     this.state = {
       loading:true,
+      strategyDetailsData:{}
     }
   }
   render() {
@@ -27,7 +28,7 @@ export default class JYProductDetails extends Component {
       return (
         <View style={{flex:1}}>
           <NavBar
-            title="商品详情"
+            title="攻略详情"
             leftIcon="ios-arrow-back-outline"
             leftPress={this.leftPress.bind(this)}
           />
@@ -41,7 +42,7 @@ export default class JYProductDetails extends Component {
     return (
       <View style={{flex:1}}>
         <NavBar
-          title="商品详情"
+          title="攻略详情"
           leftIcon="ios-arrow-back-outline"
           leftPress={this.leftPress.bind(this)}
         />
@@ -56,6 +57,40 @@ export default class JYProductDetails extends Component {
       </View>
     )
   }
+
+  componentDidMount() {
+    // https://api.mglife.me/v2/posts_v2/959
+    let url = 'https://api.mglife.me/v2/posts_v2/' + this.props.id;
+    console.log('url = ' + url);
+    this._loadDataFromNet(url);
+  }
+
+  // 获取网络数据
+  _loadDataFromNet(url) {
+    fetch(url)
+      .then((response) => response.json())
+      .then(responseData => {
+        var jsonData = responseData['data'];
+        // 数据转换
+        this._detailWithData(jsonData);
+      })
+      .catch((error) => {
+        if (error) {
+          console.log('错误信息:' + error);
+          var jsonData = localData_hom_new['data'];
+          this._detailWithData(jsonData);
+        }
+      })
+  }
+
+  _detailWithData(json) {
+    // 刷新状态
+    this.setState({
+      strategyDetailsData:json,
+      loading:false
+    })
+  }
+
 
   leftPress() {
     const { navigator } = this.props;

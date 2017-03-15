@@ -39,6 +39,7 @@ var cellBottomViewHeight = 153;
 
 // 商品详情
 import ProductDetails from '../Pages/JYProductDetails';
+import StrategyDetails from '../Pages/JYStrategyDetails'
 
 var JYHomeNew = React.createClass({
 
@@ -233,8 +234,11 @@ var JYHomeNew = React.createClass({
             const { navigator } = this.props;
             if(navigator) {
               navigator.push({
-                name: 'ProductDetails',
-                component: ProductDetails,
+                name: 'StrategyDetails',
+                component: StrategyDetails,
+                params: {
+                  id:cellPostData.id
+                }
               })
             }
           }}
