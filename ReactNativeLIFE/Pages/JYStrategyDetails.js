@@ -94,9 +94,6 @@ export default class JYStrategyDetails extends Component {
 
   leftPress() {
     const { navigator } = this.props;
-
-    console.log('navigator=' + navigator + 'props='+ this.props);
-
     if(navigator) {
       navigator.pop({
 
@@ -111,11 +108,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
   },
 
   webViewStyle:{
-    backgroundColor:'#F5FCFF',
+    backgroundColor:'white',
   }
 
 });

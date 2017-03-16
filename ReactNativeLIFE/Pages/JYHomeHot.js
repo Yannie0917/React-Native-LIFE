@@ -16,7 +16,8 @@ import {
   ListView,
   Dimensions,
   Image,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -24,6 +25,9 @@ const { width, height } = Dimensions.get('window');
 var localData_hom_hot = require('../LocalData/LocalData_home_hot.json');
 
 import CellItem from '../Component/JYHomeNewCellItem';
+
+// 清单详情页
+import ListDetails from './JYListDetails'
 
 var JYHomeHot = React.createClass({
 
@@ -111,37 +115,54 @@ var JYHomeHot = React.createClass({
     return(
       <View style={styles.cellStyle}>
 
-        {/*cell的头部上半部分*/}
-        <View style={styles.cellTopTitleViewStyle}>
-          <Text
-            style={styles.cellLeftTitleStyle}
-            numberOfLines={1}
-          >
-            {cellData.name}
-          </Text>
-
-          <View style={styles.cellRightTitleStyle}>
+        <TouchableOpacity
+          style = {styles.cellTopViewStyle}
+          activeOpacity={0.8}
+          onPress={()=>{
+            const { navigator } = this.props;
+            if(navigator) {
+              navigator.push({
+                name: 'ListDetails',
+                component: ListDetails,
+                params: {
+                  id:cellData.id
+                }
+              })
+            }
+          }}
+        >
+          {/*cell的头部上半部分*/}
+          <View style={styles.cellTopTitleViewStyle}>
             <Text
-              style={styles.cellSubTitleStyle}
+              style={styles.cellLeftTitleStyle}
+              numberOfLines={1}
             >
-              {cellData.items_count}个单品
+              {cellData.name}
             </Text>
-            <Image
-              source={require('../Images/Home/icon_goinArraw_6x8_.png')}
-            />
-          </View>
-        </View>
-        {/*cell的头部下半部分*/}
-        <View style={styles.cellBotTitleViewStyle}>
-          <Image
-            style={{width:28, height:28, marginLeft:15, borderRadius:14}}
-            source={{uri:botTitleData.avatar_url}}
-          />
-          <Text style={{paddingLeft:10, fontSize:12, color:'#8888'}}>
-            {botTitleData.nickname}
-          </Text>
 
-        </View>
+            <View style={styles.cellRightTitleStyle}>
+              <Text
+                style={styles.cellSubTitleStyle}
+              >
+                {cellData.items_count}个单品
+              </Text>
+              <Image
+                source={require('../Images/Home/icon_goinArraw_6x8_.png')}
+              />
+            </View>
+          </View>
+          {/*cell的头部下半部分*/}
+          <View style={styles.cellBotTitleViewStyle}>
+            <Image
+              style={{width:28, height:28, marginLeft:15, borderRadius:14}}
+              source={{uri:botTitleData.avatar_url}}
+            />
+            <Text style={{paddingLeft:10, fontSize:12, color:'#8888'}}>
+              {botTitleData.nickname}
+            </Text>
+
+          </View>
+        </TouchableOpacity>
         {/*cell的尾部横向滚动列表*/}
         <ScrollView
           horizontal={true}
