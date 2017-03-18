@@ -15,7 +15,8 @@ import {
   View,
   Dimensions,
   Image,
-  ListView
+  ListView,
+  TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -29,6 +30,9 @@ import SearchSpecialItem from '../Component/JYSearchSpecialCellItem';
 
 // 本地假数据
 var localData_search_singleItem = require('../LocalData/LocalData_search_singleItem.json');
+
+// tag详情页
+import SearchSingleItemList from './JYSearchSingleItemList'
 
 var JYSearchSingleItem = React.createClass({
 
@@ -95,12 +99,28 @@ var JYSearchSingleItem = React.createClass({
     return(
       <View>
 
-        <View style={styles.cellTopImageStyle}>
+        <TouchableOpacity
+          style={styles.cellTopImageStyle}
+          activeOpacity={0.8}
+          onPress={()=>{
+            const { navigator } = this.props;
+            if(navigator) {
+              navigator.push({
+                name: 'SearchSingleItemList',
+                component: SearchSingleItemList,
+                params: {
+                  id:rowData.id,
+                  title:rowData.name
+                }
+              })
+            }
+          }}
+        >
           <Image
             style={{flex:1, width:width}}
             source={{uri:rowData.icon_url}}
           />
-        </View>
+        </TouchableOpacity>
 
         <View style={{flexDirection:'row', flexWrap:'wrap', alignItems:'center'}}>
           {this._renderTagItems(rowData.subcategories)}
@@ -113,13 +133,28 @@ var JYSearchSingleItem = React.createClass({
   _renderTagItems(tagItemsData) {
     var tagItems = [];
     for (var i = 0; i < tagItemsData.length; i++) {
-      var tagData = tagItemsData[i];
+      let tagData = tagItemsData[i];
       tagItems.push(
-        <Text
-          key={i}
-          style={{padding:10, color:'#333333', fontSize:13}}>
-          {tagData.name}
-        </Text>
+          <Text
+            key={i}
+            onPress={()=>{
+              const { navigator } = this.props;
+              if(navigator) {
+                navigator.push({
+                  name: 'SearchSingleItemList',
+                  component: SearchSingleItemList,
+                  params: {
+                    id:tagData.id,
+                    title:tagData.name
+                  }
+                })
+              }
+            }}
+            style={{padding:10, color:'#333333', fontSize:13,}}>
+            {tagData.name}
+          </Text>
+
+
       )
     }
     return tagItems;

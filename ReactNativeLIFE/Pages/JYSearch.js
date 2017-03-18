@@ -57,8 +57,8 @@ export default class Home extends Component {
           />}
           locked={Platform.OS === 'ios' ? false : true}
         >
-          <SearchSpecial tabLabel="栏目" />
-          <SearchSingleItem tabLabel="单品" />
+          <SearchSpecial tabLabel="栏目" navigator={this.props.navigator}/>
+          <SearchSingleItem tabLabel="单品" navigator={this.props.navigator}/>
         </ScrollableTabView>
 
       </View>
