@@ -15,7 +15,8 @@ import {
   View,
   ListView,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -26,6 +27,9 @@ var cellTopViewHeight = width/375*200;
 var cellBottomViewHeight = 153;
 
 var localData_hom_faqs = require('../LocalData/LocalData_home_faqs.json');
+
+// 攻略详情页
+import StrategyDetails from '../Pages/JYStrategyDetails'
 
 var JYHomeFAQs = React.createClass({
 
@@ -109,7 +113,22 @@ var JYHomeFAQs = React.createClass({
     return (
       <View style={styles.cellStyle}>
 
-        <View style = {styles.cellTopViewStyle}>
+        <TouchableOpacity
+          style = {styles.cellTopViewStyle}
+          activeOpacity={0.8}
+          onPress={()=>{
+            const { navigator } = this.props;
+            if(navigator) {
+              navigator.push({
+                name: 'StrategyDetails',
+                component: StrategyDetails,
+                params: {
+                  id:cellPostData.id
+                }
+              })
+            }
+          }}
+        >
           {/*cell的上部分背景图*/}
           <Image
             style={styles.cellTopViewBackImgStyle}
@@ -144,7 +163,7 @@ var JYHomeFAQs = React.createClass({
             <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
           </View>
 
-        </View>
+        </TouchableOpacity>
 
       </View>
     )

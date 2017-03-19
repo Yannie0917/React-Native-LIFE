@@ -16,7 +16,8 @@ import {
   Image,
   ListView,
   ScrollView,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -29,6 +30,9 @@ var cellBottomViewHeight = 153;
 var localData_hom_featured = require('../LocalData/Localdata_home_featured.json');
 
 import CellItem from '../Component/JYHomeNewCellItem';
+
+// 攻略详情页
+import StrategyDetails from '../Pages/JYStrategyDetails'
 
 var JYHomeFeatured = React.createClass({
 
@@ -113,7 +117,22 @@ var JYHomeFeatured = React.createClass({
       return (
         <View style={styles.cellStyle}>
 
-          <View style = {styles.cellTopViewStyle}>
+          <TouchableOpacity
+            style = {styles.cellTopViewStyle}
+            activeOpacity={0.8}
+            onPress={()=>{
+              const { navigator } = this.props;
+              if(navigator) {
+                navigator.push({
+                  name: 'StrategyDetails',
+                  component: StrategyDetails,
+                  params: {
+                    id:cellPostData.id
+                  }
+                })
+              }
+            }}
+          >
             {/*cell的上部分背景图*/}
             <Image
               style={styles.cellTopViewBackImgStyle}
@@ -148,7 +167,7 @@ var JYHomeFeatured = React.createClass({
               <Text style={{fontSize:10, color:'white'}}>{cellPostData.likes_count}</Text>
             </View>
 
-          </View>
+          </TouchableOpacity>
 
           {/*cell下半部分的横向滚动列表*/}
           <View style={styles.cellBottomViewStyle}>
@@ -238,6 +257,7 @@ var JYHomeFeatured = React.createClass({
           title={itemData.name}   priceTitle={itemData.price}
           topImageStyle={{height:88, width: 88, borderRadius:borderRadius}}
           style={{padding: 5}}
+          navigator={this.props.navigator}
         />
       )
     }

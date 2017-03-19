@@ -28,14 +28,13 @@ export default class JYSearchSingleItemTagCellItem extends Component{
   render(){
     return(
       <View
-
         style={[styles.itemStyle, this.props.style, {width:this.props.itemWidth, height:this.props.itemHeight,}]}
         onPress={this.props.itemPress}
       >
         {/*flex:仅仅是主轴上的空间比例, 交叉轴空间还需自己设置或者内部的控件自动撑开*/}
         <View style={{flex:354}}>
           <Image
-            style={{flex:1, width:this.props.itemWidth, borderRadius:5}}
+            style={{flex:1,  borderRadius:5}}
             source={{uri:this.props.backImgUri}}
           >
           </Image>
